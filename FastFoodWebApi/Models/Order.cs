@@ -9,7 +9,20 @@ namespace FastFoodWebApi.Models
     public class Order
     {
         public int Id { get; set; }
-        public DateTime CreateAt { get; set; }
+
+
+        private DateTime? createAt = null;
+        public DateTime CreateAt
+        {
+            get
+            {
+                return this.createAt.HasValue
+                   ? this.createAt.Value
+                   : DateTime.Now;
+            }
+
+            set { this.createAt = value; }
+        }
 
         [Required]
         public int Quantity { get; set; }
