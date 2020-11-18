@@ -4,14 +4,16 @@ using FastFoodWebApi.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FastFoodWebApi.Migrations
 {
     [DbContext(typeof(FastFoodContext))]
-    partial class FastFoodContextModelSnapshot : ModelSnapshot
+    [Migration("20201117141338_AddPropCustomer")]
+    partial class AddPropCustomer
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -73,13 +75,7 @@ namespace FastFoodWebApi.Migrations
                     b.Property<int>("CustomerId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("DeliveryDate")
-                        .HasColumnType("datetime2");
-
                     b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Status")
                         .HasColumnType("int");
 
                     b.HasKey("Id");

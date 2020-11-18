@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace FastFoodWebApi.DataAccess.Contracts
 {
-    public interface ICustomer
+    public interface IOrderRepository
     {
-        public IEnumerable<Customer> GetAllCustomers();
-        public Customer GetCustomerById(int id);
+        public Task<IEnumerable<Order>> GetAllOrders();
+        public Task<Order> GetOrderById(int id);
     }
 }

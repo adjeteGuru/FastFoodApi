@@ -1,34 +1,21 @@
-﻿using System;
+﻿using FastFoodWebApi.Models;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace FastFoodWebApi.Models
+namespace FastFoodWebApi.DTOs
 {
     public enum Status
     {
         InProcessing, OnItsWay, Delivered
     }
-    public class Order
+    public class OrderReadDto
     {
         public int Id { get; set; }
 
+        public DateTime? CreateAt { get; set; }
 
-        private DateTime? createAt = null;
-        public DateTime CreateAt
-        {
-            get
-            {
-                return this.createAt.HasValue
-                   ? this.createAt.Value
-                   : DateTime.Now;
-            }
-
-            set { this.createAt = value; }
-        }
-
-        [Required]
         public int Quantity { get; set; }
 
         public DateTime DeliveryDate { get; set; }
@@ -36,5 +23,6 @@ namespace FastFoodWebApi.Models
         public int CustomerId { get; set; }
 
         public Status Status { get; set; }
+
     }
 }

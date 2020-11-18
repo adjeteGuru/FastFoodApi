@@ -2,6 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
+using FastFoodWebApi.DataAccess;
+using FastFoodWebApi.DataAccess.Contracts;
 using FastFoodWebApi.Database;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -28,6 +31,16 @@ namespace FastFoodWebApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            //services.AddSingleton<ICustomerRepository, CustomerRepository>();
+            //services.AddSingleton<IOrderRepository, OrderRepository>();
+
+            services.AddScoped<ICustomerRepository, CustomerRepository>();
+            services.AddScoped<IOrderRepository, OrderRepository>();
+
+
+            //this services allow to setup DTO so that our models won't be exposed to client APi
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             //this create the connection string of the DB
             services.AddDbContext<FastFoodContext>(options =>

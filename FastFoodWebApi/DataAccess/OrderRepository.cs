@@ -1,5 +1,7 @@
 ﻿using FastFoodWebApi.DataAccess.Contracts;
+using FastFoodWebApi.Database;
 using FastFoodWebApi.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,16 +9,26 @@ using System.Threading.Tasks;
 
 namespace FastFoodWebApi.DataAccess
 {
-    public class OrderRepository : IOrder
+    public class OrderRepository : IOrderRepository
     {
-        public IEnumerable<Order> GetAllOrders()
+        private readonly FastFoodContext _db;
+
+        //constructor dependency injection
+        public OrderRepository(FastFoodContext db)
         {
-            throw new NotImplementedException();
+            _db = db;
+        }
+        public async Task<IEnumerable<Order>> GetAllOrders()
+        {
+            var orders = await _db.Orders
+                .Include(x => x.CustomerId)
+                .ToListAsync();
+            return orders;
         }
 
-        public Order GetOrderById(int id)
+        public async Task<Order> GetOrderById(int id)
         {
-            throw new NotImplementedException();
+            return await _db.Orders.FirstOrDefaultAsync(x => x.Id == id);
         }
     }
 }

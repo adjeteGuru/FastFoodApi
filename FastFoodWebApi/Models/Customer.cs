@@ -14,6 +14,9 @@ namespace FastFoodWebApi.Models
         [MaxLength(50)]
         public string FullName { get; set; }
 
+        [Required]
+        [MaxLength(11)]
+        public string Tel { get; set; }
 
         [MaxLength(10)]
         public string HouseNo { get; set; }
