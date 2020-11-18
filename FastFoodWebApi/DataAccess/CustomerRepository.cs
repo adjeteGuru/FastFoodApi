@@ -15,6 +15,16 @@ namespace FastFoodWebApi.DataAccess
         {
             _db = db;
         }
+
+        public void CreateCustomer(Customer customer)
+        {
+            if (customer == null)
+            {
+                throw new ArgumentNullException(nameof(customer));
+            }
+            _db.Customers.Add(customer);
+        }
+
         public IEnumerable<Customer> GetAllCustomers()
         {
             return _db.Customers.ToList();
@@ -23,6 +33,11 @@ namespace FastFoodWebApi.DataAccess
         public Customer GetCustomerById(int? id)
         {
             return _db.Customers.FirstOrDefault(x => x.Id == id);
+        }
+
+        public bool SaveChanges()
+        {
+            return (_db.SaveChanges() >= 0);
         }
     }
 }

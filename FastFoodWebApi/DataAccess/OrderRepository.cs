@@ -18,6 +18,17 @@ namespace FastFoodWebApi.DataAccess
         {
             _db = db;
         }
+
+        public void CreateOrder(Order order)
+        {
+            if (order == null)
+            {
+                throw new ArgumentNullException(nameof(order));
+            }
+
+            _db.Orders.Add(order);
+        }
+
         public async Task<IEnumerable<Order>> GetAllOrders()
         {
             var orders = await _db.Orders
@@ -29,6 +40,11 @@ namespace FastFoodWebApi.DataAccess
         public async Task<Order> GetOrderById(int id)
         {
             return await _db.Orders.FirstOrDefaultAsync(x => x.Id == id);
+        }
+
+        public bool SaveChanges()
+        {
+            return (_db.SaveChanges() >= 0);
         }
     }
 }

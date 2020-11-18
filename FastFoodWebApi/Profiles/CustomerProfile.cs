@@ -13,8 +13,12 @@ namespace FastFoodWebApi.Profiles
     public class CustomerProfile : Profile
     {
         public CustomerProfile()
-        {
+        {// we are mapping Customer from the model to CustomerRead DTO
+            // Source ---> Target (destination)
             CreateMap<Customer, CustomerReadDto>();
+
+            //let's map the CustomerCreateDto back to the Customer model
+            CreateMap<CustomerCreateDto, Customer>();
         }
     }
 }

@@ -8,7 +8,10 @@ namespace FastFoodWebApi.DataAccess.Contracts
 {
     public interface ICustomerRepository
     {
+        bool SaveChanges();
         public IEnumerable<Customer> GetAllCustomers();
         public Customer GetCustomerById(int? id);
+
+        public void CreateCustomer(Customer customer);
     }
 }
