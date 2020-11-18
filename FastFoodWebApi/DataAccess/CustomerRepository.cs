@@ -1,4 +1,5 @@
 ﻿using FastFoodWebApi.DataAccess.Contracts;
+using FastFoodWebApi.Database;
 using FastFoodWebApi.Models;
 using System;
 using System.Collections.Generic;
@@ -7,16 +8,51 @@ using System.Threading.Tasks;
 
 namespace FastFoodWebApi.DataAccess
 {
-    public class CustomerRepository : ICustomer
+    public class CustomerRepository : ICustomerRepository
     {
-        public IEnumerable<Customer> GetAllCustomers()
+        private readonly FastFoodContext _db;
+        public CustomerRepository(FastFoodContext db)
         {
-            throw new NotImplementedException();
+            _db = db;
         }
 
-        public Customer GetCustomerById(int id)
+        public void CreateCustomer(Customer customer)
         {
-            throw new NotImplementedException();
+            if (customer == null)
+            {
+                throw new ArgumentNullException(nameof(customer));
+            }
+            _db.Customers.Add(customer);
+        }
+
+        public void DeleteCustomer(Customer customer)
+        {
+            if (customer == null)
+            {
+                throw new ArgumentNullException(nameof(customer));
+            }
+            _db.Customers.Remove(customer);
+        }
+
+        public IEnumerable<Customer> GetAllCustomers()
+        {
+            return _db.Customers.ToList();
+        }
+
+        public Customer GetCustomerById(int? id)
+        {
+            return _db.Customers.FirstOrDefault(x => x.Id == id);
+        }
+
+        public bool SaveChanges()
+        {
+            return (_db.SaveChanges() >= 0);
+        }
+
+        public void UpdateCustomer(Customer customer)
+        {
+            //for update do notting
+
         }
     }
 }

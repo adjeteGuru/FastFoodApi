@@ -2,6 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
+using FastFoodWebApi.DataAccess;
+using FastFoodWebApi.DataAccess.Contracts;
 using FastFoodWebApi.Database;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -12,6 +15,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json.Serialization;
 
 namespace FastFoodWebApi
 {
@@ -27,7 +31,20 @@ namespace FastFoodWebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson(s =>
+            {
+                s.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+            });
+
+            //services.AddSingleton<ICustomerRepository, CustomerRepository>();
+            //services.AddSingleton<IOrderRepository, OrderRepository>();
+
+            services.AddScoped<ICustomerRepository, CustomerRepository>();
+            services.AddScoped<IOrderRepository, OrderRepository>();
+
+
+            //this services allow to setup DTO so that our models won't be exposed to client APi
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             //this create the connection string of the DB
             services.AddDbContext<FastFoodContext>(options =>

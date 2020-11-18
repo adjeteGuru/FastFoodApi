@@ -4,11 +4,10 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace FastFoodWebApi.Models
+namespace FastFoodWebApi.DTOs
 {
-    public class Customer
+    public class CustomerCreateDto
     {
-        public int Id { get; set; }
 
         [Required]
         [MaxLength(50)]
@@ -32,7 +31,5 @@ namespace FastFoodWebApi.Models
         [Required]
         [MaxLength(20)]
         public string City { get; set; }
-
-        public ICollection<Order> Orders { get; set; }
     }
 }
