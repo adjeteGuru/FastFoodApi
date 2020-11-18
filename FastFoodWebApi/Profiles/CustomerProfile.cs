@@ -19,6 +19,12 @@ namespace FastFoodWebApi.Profiles
 
             //let's map the CustomerCreateDto back to the Customer model
             CreateMap<CustomerCreateDto, Customer>();
+
+            //let's map the CustomerCreateDto back to the Customer model
+            CreateMap<CustomerUpdateDto, Customer>();
+
+            //this for the serialization json/Patch
+            CreateMap<Customer, CustomerUpdateDto>();
         }
     }
 }

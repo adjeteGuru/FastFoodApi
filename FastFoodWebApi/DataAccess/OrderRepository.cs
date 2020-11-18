@@ -29,17 +29,17 @@ namespace FastFoodWebApi.DataAccess
             _db.Orders.Add(order);
         }
 
-        public async Task<IEnumerable<Order>> GetAllOrders()
+        public IEnumerable<Order> GetAllOrders()
         {
-            var orders = await _db.Orders
+            var orders = _db.Orders
                 .Include(x => x.CustomerId)
-                .ToListAsync();
+                .ToList();
             return orders;
         }
 
-        public async Task<Order> GetOrderById(int id)
+        public Order GetOrderById(int? id)
         {
-            return await _db.Orders.FirstOrDefaultAsync(x => x.Id == id);
+            return _db.Orders.FirstOrDefault(x => x.Id == id);
         }
 
         public bool SaveChanges()

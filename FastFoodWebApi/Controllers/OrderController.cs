@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using FastFoodWebApi.Database;
 using FastFoodWebApi.Models;
 using FastFoodWebApi.DataAccess.Contracts;
+using AutoMapper;
+using FastFoodWebApi.DTOs;
 
 namespace FastFoodWebApi.Controllers
 {
@@ -17,33 +19,38 @@ namespace FastFoodWebApi.Controllers
     {
         //private readonly FastFoodContext _context;
         private readonly IOrderRepository _orderRepository;
+        private readonly IMapper _mapper;
 
-        public OrderController(IOrderRepository orderRepository)
+        public OrderController(IOrderRepository orderRepository, IMapper mapper)
         {
             _orderRepository = orderRepository;
+            _mapper = mapper;
         }
 
-        // GET: api/Order
-        //[HttpGet]
-        //public async Task<ActionResult<IEnumerable<Order>>> GetAllOrders()
-        //{
-        //    return await _orderRepository.GetAllOrders().FirstOrDefaultAsync();
-        //        //.Where(x=>x.Id );
-        //}
+        //GET: api/Order
+        [HttpGet]
+        public ActionResult<IEnumerable<OrderReadDto>> GetOrders()
+        {
+            var orders = _orderRepository.GetAllOrders();
 
-        //// GET: api/Order/5
-        //[HttpGet("{id}")]
-        //public async Task<ActionResult<Order>> GetOrder(int id)
-        //{
-        //    var order = await _context.Orders.FindAsync(id);
+            return Ok(_mapper.Map<IEnumerable<OrderReadDto>>(orders));
 
-        //    if (order == null)
-        //    {
-        //        return NotFound();
-        //    }
+        }
 
-        //    return order;
-        //}
+        // GET: api/Order/5
+        [HttpGet("{id}")]
+        public ActionResult<OrderReadDto> GetOrder(int? id)
+        {
+
+            var order = _orderRepository.GetOrderById(id);
+
+            if (order == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(_mapper.Map<OrderReadDto>(order));
+        }
 
         // PUT: api/Order/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for

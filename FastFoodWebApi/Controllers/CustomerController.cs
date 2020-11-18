@@ -7,6 +7,7 @@ using FastFoodWebApi.DataAccess.Contracts;
 using FastFoodWebApi.DTOs;
 using FastFoodWebApi.Models;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FastFoodWebApi.Controllers
@@ -68,16 +69,77 @@ namespace FastFoodWebApi.Controllers
             return CreatedAtRoute(nameof(GetCustomer), new { customerReadDto.Id }, customerReadDto);
         }
 
-        //// PUT: api/Customer/5
-        //[HttpPut("{id}")]
-        //public void Put(int id, [FromBody] string value)
-        //{
-        //}
+        // PUT: api/Customer/5
+        [HttpPut("{id}")]
+        public ActionResult UpdateCustomer(int id, CustomerUpdateDto customerUpdateDto)
+        {
+            //if variable exist check
+            var customerToUpdate = _customerRepository.GetCustomerById(id);
 
-        //// DELETE: api/ApiWithActions/5
-        //[HttpDelete("{id}")]
-        //public void Delete(int id)
-        //{
-        //}
+            if (customerToUpdate == null)
+            {
+                return NotFound();
+            }
+
+            _mapper.Map(customerUpdateDto, customerToUpdate);
+
+            _customerRepository.UpdateCustomer(customerToUpdate);
+
+            _customerRepository.SaveChanges();
+
+            return NoContent();
+        }
+
+        // PATCH: api/Customer/5
+        [HttpPatch("{id}")]
+
+        //we are receiving from a client here is a patch a document Json 
+        //that we want to apply our customer model 
+        public ActionResult PartialCustomerUpdate(int id, JsonPatchDocument<CustomerUpdateDto> patchDoc)
+        {
+
+            //if variable exist check
+            var customerToUpdate = _customerRepository.GetCustomerById(id);
+
+            if (customerToUpdate == null)
+            {
+                return NotFound();
+            }
+
+            // generate a customer update dto from a source customerToUpdate
+            //
+            var customerToPatch = _mapper.Map<CustomerUpdateDto>(customerToUpdate);
+
+            //then apply the patch
+            patchDoc.ApplyTo(customerToPatch, ModelState);
+
+            //validation check
+            if (!TryValidateModel(customerToPatch))
+            {
+                return ValidationProblem(ModelState);
+            }
+
+            _mapper.Map(customerToPatch, customerToUpdate);
+            _customerRepository.SaveChanges();
+
+            return NoContent();
+        }
+
+        // DELETE: api/Customer/5
+        [HttpDelete("{id}")]
+        public ActionResult DeleteCustomer(int id)
+        {
+            var customerToDelete = _customerRepository.GetCustomerById(id);
+
+            if (customerToDelete == null)
+            {
+                return NotFound();
+            }
+
+            _customerRepository.DeleteCustomer(customerToDelete);
+            _customerRepository.SaveChanges();
+
+            return NoContent();
+        }
     }
 }

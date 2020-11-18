@@ -13,5 +13,8 @@ namespace FastFoodWebApi.DataAccess.Contracts
         public Customer GetCustomerById(int? id);
 
         public void CreateCustomer(Customer customer);
+        public void UpdateCustomer(Customer customer);
+
+        public void DeleteCustomer(Customer customer);
     }
 }

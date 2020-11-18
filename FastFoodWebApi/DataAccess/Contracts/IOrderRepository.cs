@@ -9,8 +9,8 @@ namespace FastFoodWebApi.DataAccess.Contracts
     public interface IOrderRepository
     {
         bool SaveChanges();
-        public Task<IEnumerable<Order>> GetAllOrders();
-        public Task<Order> GetOrderById(int id);
+        public IEnumerable<Order> GetAllOrders();
+        public Order GetOrderById(int? id);
 
         public void CreateOrder(Order order);
     }
