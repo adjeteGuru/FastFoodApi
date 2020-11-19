@@ -32,7 +32,7 @@ namespace FastFoodWebApi.DataAccess
         public IEnumerable<Order> GetAllOrders()
         {
             var orders = _db.Orders
-                .Include(x => x.CustomerId)
+
                 .ToList();
             return orders;
         }

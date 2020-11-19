@@ -52,6 +52,29 @@ namespace FastFoodWebApi.Controllers
             return Ok(_mapper.Map<OrderReadDto>(order));
         }
 
+
+        // POST: api/Order/5
+        [HttpPost]
+        public ActionResult<OrderReadDto> CreateOrder(OrderCreateDto orderCreateDto)
+        {
+            //create an object Model that is the result of a created mapped object  
+            var orderModel = _mapper.Map<Order>(orderCreateDto);
+
+            if (orderModel == null)
+            {
+                return NotFound();
+            }
+
+            _orderRepository.CreateOrder(orderModel);
+
+            _orderRepository.SaveChanges();
+
+            var orderReadDto = _mapper.Map<OrderReadDto>(orderModel);
+
+            return CreatedAtRoute(nameof(GetOrder), new { orderReadDto.Id }, orderReadDto);
+
+        }
+
         // PUT: api/Order/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.

@@ -38,7 +38,8 @@ namespace FastFoodWebApi.Controllers
         // GET: api/Customer/5
         [HttpGet("{id}", Name = "GetCustomer")]
         //we want to retun ActionResult through CustomerReadDto
-        public ActionResult<IEnumerable<CustomerReadDto>> GetCustomer(int? id)
+        //public ActionResult<IEnumerable<CustomerReadDto>> GetCustomer(int? id)
+        public ActionResult<CustomerReadDto> GetCustomer(int? id)
         {
             var customer = _customerRepository.GetCustomerById(id);
             if (customer == null)
