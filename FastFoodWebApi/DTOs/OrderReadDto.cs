@@ -6,10 +6,6 @@ using System.Threading.Tasks;
 
 namespace FastFoodWebApi.DTOs
 {
-    public enum Status
-    {
-        InProcessing, OnItsWay, Delivered
-    }
     public class OrderReadDto
     {
         public int Id { get; set; }
@@ -19,7 +15,7 @@ namespace FastFoodWebApi.DTOs
         public int Quantity { get; set; }
 
         public DateTime DeliveryDate { get; set; }
-        public Customer Customer { get; set; }
+        //public Customer Customer { get; set; }
         public int CustomerId { get; set; }
 
         public Status Status { get; set; }

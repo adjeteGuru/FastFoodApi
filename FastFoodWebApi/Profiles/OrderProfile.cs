@@ -12,9 +12,14 @@ namespace FastFoodWebApi.Profiles
     {
         public OrderProfile()
         {
+            //source ---> destination
             CreateMap<Order, OrderReadDto>();
 
             CreateMap<OrderCreateDto, Order>();
+
+            CreateMap<OrderUpdateDto, Order>();
+
+            CreateMap<Order, OrderUpdateDto>();
         }
     }
 }

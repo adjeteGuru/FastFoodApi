@@ -10,6 +10,7 @@ using FastFoodWebApi.Models;
 using FastFoodWebApi.DataAccess.Contracts;
 using AutoMapper;
 using FastFoodWebApi.DTOs;
+using Microsoft.AspNetCore.JsonPatch;
 
 namespace FastFoodWebApi.Controllers
 {
@@ -17,7 +18,6 @@ namespace FastFoodWebApi.Controllers
     [ApiController]
     public class OrderController : ControllerBase
     {
-        //private readonly FastFoodContext _context;
         private readonly IOrderRepository _orderRepository;
         private readonly IMapper _mapper;
 
@@ -52,69 +52,95 @@ namespace FastFoodWebApi.Controllers
             return Ok(_mapper.Map<OrderReadDto>(order));
         }
 
-        // PUT: api/Order/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        //[HttpPut("{id}")]
-        //public async Task<IActionResult> PutOrder(int id, Order order)
-        //{
-        //    if (id != order.Id)
-        //    {
-        //        return BadRequest();
-        //    }
 
-        //    _context.Entry(order).State = EntityState.Modified;
+        // POST: api/Order/5
+        [HttpPost]
+        public ActionResult<OrderReadDto> CreateOrder(OrderCreateDto orderCreateDto)
+        {
+            //create an object Model that is the result of a created mapped object  
+            var orderModel = _mapper.Map<Order>(orderCreateDto);
 
-        //    try
-        //    {
-        //        await _context.SaveChangesAsync();
-        //    }
-        //    catch (DbUpdateConcurrencyException)
-        //    {
-        //        if (!OrderExists(id))
-        //        {
-        //            return NotFound();
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
+            if (orderModel == null)
+            {
+                return NotFound();
+            }
 
-        //    return NoContent();
-        //}
+            _orderRepository.CreateOrder(orderModel);
 
-        // POST: api/Order
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        //[HttpPost]
-        //public async Task<ActionResult<Order>> PostOrder(Order order)
-        //{
-        //    _context.Orders.Add(order);
-        //    await _context.SaveChangesAsync();
+            _orderRepository.SaveChanges();
 
-        //    return CreatedAtAction("GetOrder", new { id = order.Id }, order);
-        //}
+            var orderReadDto = _mapper.Map<OrderReadDto>(orderModel);
 
-        //// DELETE: api/Order/5
-        //[HttpDelete("{id}")]
-        //public async Task<ActionResult<Order>> DeleteOrder(int id)
-        //{
-        //    var order = await _context.Orders.FindAsync(id);
-        //    if (order == null)
-        //    {
-        //        return NotFound();
-        //    }
+            return CreatedAtRoute(nameof(GetOrder), new { orderReadDto.Id }, orderReadDto);
 
-        //    _context.Orders.Remove(order);
-        //    await _context.SaveChangesAsync();
+        }
 
-        //    return order;
-        //}
+        // PUT: api/Order/5       
+        [HttpPut("{id}")]
+        public IActionResult UpdateOrder(int id, OrderUpdateDto orderUpdateDto)
+        {
+            var oderToUpdate = _orderRepository.GetOrderById(id);
 
-        //private bool OrderExists(int id)
-        //{
-        //    return _context.Orders.Any(e => e.Id == id);
-        //}
+            if (oderToUpdate == null)
+            {
+                return NotFound();
+            }
+
+            var orderModel = _mapper.Map(orderUpdateDto, oderToUpdate);
+
+            _orderRepository.UpdateOrder(orderModel);
+
+            _orderRepository.SaveChanges();
+
+            return NoContent();
+        }
+
+
+        // PATCH: api/Order/5 
+        [HttpPatch("{id}")]
+        public ActionResult PartialOrderUpdate(int id, JsonPatchDocument<OrderUpdateDto> patchDoc)
+        {
+            var oderToUpdate = _orderRepository.GetOrderById(id);
+
+            if (oderToUpdate == null)
+            {
+                return NotFound();
+            }
+
+
+            var orderToPatch = _mapper.Map<OrderUpdateDto>(oderToUpdate);
+
+            patchDoc.ApplyTo(orderToPatch, ModelState);
+
+            if (!TryValidateModel(patchDoc))
+            {
+                return ValidationProblem(ModelState);
+            }
+
+            _mapper.Map(orderToPatch, oderToUpdate);
+
+            _orderRepository.SaveChanges();
+            return NoContent();
+
+        }
+
+        // DELETE: api/Order/5
+        [HttpDelete("{id}")]
+        public ActionResult<Order> DeleteOrder(int id)
+        {
+            var orderToDelete = _orderRepository.GetOrderById(id);
+
+            if (orderToDelete == null)
+            {
+                return NotFound();
+            }
+
+            _orderRepository.DeleteOrder(orderToDelete);
+
+            _orderRepository.SaveChanges();
+
+            return NoContent();
+        }
+
     }
 }

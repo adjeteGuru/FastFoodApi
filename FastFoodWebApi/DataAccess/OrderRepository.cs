@@ -29,10 +29,20 @@ namespace FastFoodWebApi.DataAccess
             _db.Orders.Add(order);
         }
 
+        public void DeleteOrder(Order order)
+        {
+            if (order == null)
+            {
+                throw new ArgumentNullException(nameof(order));
+            }
+
+            _db.Orders.Remove(order);
+        }
+
         public IEnumerable<Order> GetAllOrders()
         {
             var orders = _db.Orders
-                .Include(x => x.CustomerId)
+
                 .ToList();
             return orders;
         }
@@ -45,6 +55,11 @@ namespace FastFoodWebApi.DataAccess
         public bool SaveChanges()
         {
             return (_db.SaveChanges() >= 0);
+        }
+
+        public void UpdateOrder(Order order)
+        {
+            //throw new NotImplementedException();
         }
     }
 }

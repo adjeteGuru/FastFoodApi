@@ -13,5 +13,9 @@ namespace FastFoodWebApi.DataAccess.Contracts
         public Order GetOrderById(int? id);
 
         public void CreateOrder(Order order);
+
+        public void UpdateOrder(Order order);
+
+        public void DeleteOrder(Order order);
     }
 }
