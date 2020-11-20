@@ -15,7 +15,7 @@ namespace FastFoodWebApi.DTOs
         public int Quantity { get; set; }
 
         public DateTime DeliveryDate { get; set; }
-        public Customer Customer { get; set; }
+        //public Customer Customer { get; set; }
         public int CustomerId { get; set; }
 
         public Status Status { get; set; }
