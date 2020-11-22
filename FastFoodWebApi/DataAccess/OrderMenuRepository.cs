@@ -1,4 +1,5 @@
 ﻿using FastFoodWebApi.DataAccess.Contracts;
+using FastFoodWebApi.Database;
 using FastFoodWebApi.Models;
 using System;
 using System.Collections.Generic;
@@ -9,34 +10,48 @@ namespace FastFoodWebApi.DataAccess
 {
     public class OrderMenuRepository : IOrderMenuRepository
     {
+        private readonly FastFoodContext _db;
+        public OrderMenuRepository(FastFoodContext db)
+        {
+            _db = db;
+        }
         public void CreateOrderMenu(OrderMenu orderMenu)
         {
-            throw new NotImplementedException();
+            if (orderMenu == null)
+            {
+                throw new ArgumentNullException(nameof(orderMenu));
+            }
+            _db.OrderMenus.Add(orderMenu);
         }
 
         public IEnumerable<OrderMenu> GetAllOrderMenus()
         {
-            throw new NotImplementedException();
+            return _db.OrderMenus.ToList();
         }
 
         public OrderMenu GetOrderMenuById(int id)
         {
-            throw new NotImplementedException();
+            return _db.OrderMenus.FirstOrDefault(x => x.MenuId == id && x.OrderId == id);
         }
 
         public void RemoveOrderMenu(OrderMenu orderMenu)
         {
-            throw new NotImplementedException();
+            if (orderMenu == null)
+            {
+                throw new ArgumentNullException(nameof(orderMenu));
+            }
+
+            _db.OrderMenus.Remove(orderMenu);
         }
 
         public bool SaveChanges()
         {
-            throw new NotImplementedException();
+            return (_db.SaveChanges() >= 0);
         }
 
         public void UpdateOrderMenu(OrderMenu orderMenu)
         {
-            throw new NotImplementedException();
+            //
         }
     }
 }

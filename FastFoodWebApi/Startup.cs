@@ -36,11 +36,12 @@ namespace FastFoodWebApi
                 s.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
             });
 
-            //services.AddSingleton<ICustomerRepository, CustomerRepository>();
-            //services.AddSingleton<IOrderRepository, OrderRepository>();
 
             services.AddScoped<ICustomerRepository, CustomerRepository>();
             services.AddScoped<IOrderRepository, OrderRepository>();
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddScoped<IMenuRepository, MenuRepository>();
+            services.AddScoped<IOrderMenuRepository, OrderMenuRepository>();
 
 
             //this services allow to setup DTO so that our models won't be exposed to client APi
