@@ -19,6 +19,8 @@ namespace FastFoodWebApi.Database
         public DbSet<Menu> Menus { get; set; }
         public DbSet<OrderMenu> OrderMenus { get; set; }
 
+        public DbSet<Category> Categories { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<OrderMenu>()
