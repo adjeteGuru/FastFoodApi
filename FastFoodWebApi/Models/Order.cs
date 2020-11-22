@@ -28,8 +28,7 @@ namespace FastFoodWebApi.Models
             set { this.createAt = value; }
         }
 
-        [Required]
-        public int Quantity { get; set; }
+
 
         public float DeliveryCharge { get; set; }
         public TimeSpan EstimateTime { get; set; }
