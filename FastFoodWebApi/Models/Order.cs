@@ -31,10 +31,17 @@ namespace FastFoodWebApi.Models
         [Required]
         public int Quantity { get; set; }
 
-        public DateTime DeliveryDate { get; set; }
+        public float DeliveryCharge { get; set; }
+        public TimeSpan EstimateTime { get; set; }
+
+        [MaxLength(50)]
+        public string Alergy { get; set; }
+
         public Customer Customer { get; set; }
         public int CustomerId { get; set; }
 
         public Status Status { get; set; }
+
+        public ICollection<OrderMenu> OrderMenus { get; set; }
     }
 }
