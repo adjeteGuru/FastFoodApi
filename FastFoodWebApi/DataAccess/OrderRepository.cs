@@ -42,14 +42,16 @@ namespace FastFoodWebApi.DataAccess
         public IEnumerable<Order> GetAllOrders()
         {
             var orders = _db.Orders
-
+                .Include(x => x.Customer)
                 .ToList();
             return orders;
         }
 
         public Order GetOrderById(int? id)
         {
-            return _db.Orders.FirstOrDefault(x => x.Id == id);
+            return _db.Orders
+                .Include(x => x.Customer)
+                .FirstOrDefault(x => x.Id == id);
         }
 
         public bool SaveChanges()

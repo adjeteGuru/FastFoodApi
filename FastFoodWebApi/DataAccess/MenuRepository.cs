@@ -27,13 +27,17 @@ namespace FastFoodWebApi.DataAccess
 
         public IEnumerable<Menu> GetAllMenus()
         {
-            return _db.Menus.ToList();
+            return _db.Menus
+                .Include(x => x.Category)
+                .ToList();
 
         }
 
         public Menu GetMenuById(int id)
         {
-            return _db.Menus.FirstOrDefault(x => x.Id == id);
+            return _db.Menus
+                .Include(x => x.Category)
+                .FirstOrDefault(x => x.Id == id);
         }
 
         public void RemoveMenu(Menu menu)

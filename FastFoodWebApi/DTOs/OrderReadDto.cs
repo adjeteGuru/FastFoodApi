@@ -13,7 +13,7 @@ namespace FastFoodWebApi.DTOs
 
         public DateTime? CreateAt { get; set; }
 
-        //public Customer Customer { get; set; }
+        public Customer Customer { get; set; }
         public int CustomerId { get; set; }
 
         public float DeliveryCharge { get; set; }
@@ -23,6 +23,8 @@ namespace FastFoodWebApi.DTOs
         public string Alergy { get; set; }
 
         public Status Status { get; set; }
+
+        //public ICollection<OrderMenu> OrderMenus { get; set; }
 
     }
 }
