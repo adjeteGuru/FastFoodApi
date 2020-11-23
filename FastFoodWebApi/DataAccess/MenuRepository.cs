@@ -1,6 +1,7 @@
 ﻿using FastFoodWebApi.DataAccess.Contracts;
 using FastFoodWebApi.Database;
 using FastFoodWebApi.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,6 +28,7 @@ namespace FastFoodWebApi.DataAccess
         public IEnumerable<Menu> GetAllMenus()
         {
             return _db.Menus.ToList();
+
         }
 
         public Menu GetMenuById(int id)

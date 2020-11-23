@@ -64,11 +64,10 @@ namespace FastFoodWebApi.Controllers
             //
             var customerReadDto = _mapper.Map<CustomerReadDto>(customerModel);
 
-            //return Ok(customerModel);
             //retun CreateAtRoute in the name of our method (GetCustomer) that retrieve a single customer
             //then create Anonymous new customer object then pass back 
             return CreatedAtRoute(nameof(GetCustomer), new { customerReadDto.Id }, customerReadDto);
-        }//return CreatedAtAction("GetOrder", new { id = order.Id }, order);
+        }
 
         // PUT: api/Customer/5
         [HttpPut("{id}")]
