@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FastFoodWebApi.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -19,7 +20,9 @@ namespace FastFoodWebApi.DTOs
 
         public string Postcode { get; set; }
 
-        //public string City { get; set; }
+        public string City { get; set; }
+
+        public ICollection<Order> Orders { get; set; }
 
     }
 }

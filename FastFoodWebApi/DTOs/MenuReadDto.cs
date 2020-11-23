@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FastFoodWebApi.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -17,7 +18,9 @@ namespace FastFoodWebApi.DTOs
 
         [MaxLength(100)]
         public string Note { get; set; }
-
+        public Category Category { get; set; }
         public int CategoryId { get; set; }
+
+        //public ICollection<OrderMenu> OrderMenus { get; set; }
     }
 }

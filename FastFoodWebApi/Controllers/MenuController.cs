@@ -78,7 +78,7 @@ namespace FastFoodWebApi.Controllers
             return NoContent();
         }
 
-        // DELETE: api/ApiWithActions/5
+        // DELETE: api/Menu/5
         [HttpDelete("{id}")]
         public ActionResult DeleteMenu(int id)
         {
