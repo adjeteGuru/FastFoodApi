@@ -4,14 +4,16 @@ using FastFoodWebApi.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FastFoodWebApi.Migrations
 {
     [DbContext(typeof(FastFoodContext))]
-    partial class FastFoodContextModelSnapshot : ModelSnapshot
+    [Migration("20201123231252_PropertyOrderMenuAmended")]
+    partial class PropertyOrderMenuAmended
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -42,10 +44,6 @@ namespace FastFoodWebApi.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .UseIdentityColumn();
-
-                    b.Property<string>("BuildingName")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("City")
                         .IsRequired()
@@ -91,10 +89,6 @@ namespace FastFoodWebApi.Migrations
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
-                    b.Property<string>("ImagePath")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -104,8 +98,8 @@ namespace FastFoodWebApi.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(3,2)");
+                    b.Property<float>("Price")
+                        .HasColumnType("real");
 
                     b.HasKey("Id");
 
@@ -131,8 +125,8 @@ namespace FastFoodWebApi.Migrations
                     b.Property<int>("CustomerId")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("DeliveryCharge")
-                        .HasColumnType("decimal(3,2)");
+                    b.Property<float>("DeliveryCharge")
+                        .HasColumnType("real");
 
                     b.Property<TimeSpan>("EstimateTime")
                         .HasColumnType("time");

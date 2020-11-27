@@ -17,6 +17,8 @@ namespace FastFoodWebApi.DTOs
         [MaxLength(11)]
         public string Tel { get; set; }
 
+        public string BuildingName { get; set; }
+
         [MaxLength(10)]
         public string HouseNo { get; set; }
 

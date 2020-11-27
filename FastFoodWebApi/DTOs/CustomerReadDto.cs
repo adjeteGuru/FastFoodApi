@@ -13,6 +13,7 @@ namespace FastFoodWebApi.DTOs
         public string FullName { get; set; }
 
         public string Tel { get; set; }
+        public string BuildingName { get; set; }
 
         public string HouseNo { get; set; }
 

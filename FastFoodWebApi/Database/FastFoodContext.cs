@@ -21,22 +21,36 @@ namespace FastFoodWebApi.Database
 
         public DbSet<Category> Categories { get; set; }
 
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<OrderMenu>()
-                .HasKey(t => new { t.OrderId, t.MenuId });
+            base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<OrderMenu>()
-                .HasOne(pt => pt.Order)
-                .WithMany(p => p.OrderMenus)
-                .HasForeignKey(pt => pt.OrderId);
+            modelBuilder.Entity<Order>()
+                .Property(p => p.DeliveryCharge)
+                .HasColumnType("decimal(3,2)");
 
-            modelBuilder.Entity<OrderMenu>()
-                .HasOne(pt => pt.Menu)
-                 .WithMany(t => t.OrderMenus)
-                .HasForeignKey(pt => pt.MenuId);
-
+            modelBuilder.Entity<Menu>()
+                .Property(p => p.Price)
+                .HasColumnType("decimal(3,2)");
         }
+
+        //protected override void OnModelCreating(ModelBuilder modelBuilder)
+        //{
+        //    modelBuilder.Entity<OrderMenu>()
+        //        .HasKey(t => new { t.OrderId, t.MenuId });
+
+        //    modelBuilder.Entity<OrderMenu>()
+        //        .HasOne(pt => pt.Order)
+        //        .WithMany(p => p.OrderMenus)
+        //        .HasForeignKey(pt => pt.OrderId);
+
+        //    modelBuilder.Entity<OrderMenu>()
+        //        .HasOne(pt => pt.Menu)
+        //         .WithMany(t => t.OrderMenus)
+        //        .HasForeignKey(pt => pt.MenuId);
+
+        //}
 
     }
 }

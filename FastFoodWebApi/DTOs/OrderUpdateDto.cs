@@ -19,7 +19,7 @@ namespace FastFoodWebApi.DTOs
         //public Customer Customer { get; set; }
         public int CustomerId { get; set; }
 
-        public float DeliveryCharge { get; set; }
+        public decimal DeliveryCharge { get; set; }
         public TimeSpan EstimateTime { get; set; }
 
         [MaxLength(50)]

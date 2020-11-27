@@ -10,13 +10,20 @@ namespace FastFoodWebApi.Models
     {
         public int Id { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Please enter name")]
         [MaxLength(50)]
+        [Display(Name = "Menu Name")]
         public string Name { get; set; }
-        public float Price { get; set; }
+
+        [Display(Name = "Price")]
+        public decimal Price { get; set; }
 
         [MaxLength(100)]
+        [Display(Name = "Special Note!")]
         public string Note { get; set; }
+
+        [Required(ErrorMessage = "Please choose profile image")]
+        public string ImagePath { get; set; }
 
         public int CategoryId { get; set; }
         public Category Category { get; set; }
