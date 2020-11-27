@@ -12,7 +12,9 @@ namespace FastFoodWebApi.DTOs
         [Required]
         [MaxLength(50)]
         public string Name { get; set; }
-        public float Price { get; set; }
+        public decimal Price { get; set; }
+
+        public string ImagePath { get; set; }
 
         [MaxLength(100)]
         public string Note { get; set; }

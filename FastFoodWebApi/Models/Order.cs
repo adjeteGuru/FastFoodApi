@@ -29,11 +29,14 @@ namespace FastFoodWebApi.Models
         }
 
 
+        [Display(Name = "Delivery Charge")]
+        public decimal DeliveryCharge { get; set; }
 
-        public float DeliveryCharge { get; set; }
+        [Display(Name = "Estimate time")]
         public TimeSpan EstimateTime { get; set; }
 
         [MaxLength(50)]
+        [Display(Name = "Alergy to!")]
         public string Alergy { get; set; }
 
         public Customer Customer { get; set; }

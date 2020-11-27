@@ -38,7 +38,8 @@ namespace FastFoodWebApi.DataAccess
             return _db.OrderMenus
                 .Include(x => x.Menu)
                 .Include(x => x.Order)
-                .FirstOrDefault(x => x.MenuId == id || x.OrderId == id);
+                .FirstOrDefault(x => x.Id == id);
+            //.FirstOrDefault(x => x.MenuId == id || x.OrderId == id);
         }
 
         public void RemoveOrderMenu(OrderMenu orderMenu)

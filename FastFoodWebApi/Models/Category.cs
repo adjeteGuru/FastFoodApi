@@ -10,8 +10,9 @@ namespace FastFoodWebApi.Models
     {
         public int Id { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Please enter category name")]
         [MaxLength(50)]
+        [Display(Name = "Food Type")]
         public string Name { get; set; }
 
         public ICollection<Menu> Menus { get; set; }

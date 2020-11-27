@@ -18,6 +18,8 @@ namespace FastFoodWebApi.Profiles
             CreateMap<CategoryCreateDto, Category>();
 
             CreateMap<CategoryUpdateDto, Category>();
+
+            CreateMap<Category, CategoryUpdateDto>();
         }
 
 
