@@ -28,7 +28,8 @@ namespace FastFoodWebApi.Database
 
             modelBuilder.Entity<Order>()
                 .Property(p => p.DeliveryCharge)
-                .HasColumnType("decimal(3,2)");
+                .HasColumnType("decimal(3,2)")
+                .HasDefaultValue(2);
 
             modelBuilder.Entity<Menu>()
                 .Property(p => p.Price)

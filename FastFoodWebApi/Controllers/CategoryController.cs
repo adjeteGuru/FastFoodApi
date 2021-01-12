@@ -25,7 +25,7 @@ namespace FastFoodWebApi.Controllers
         }
         // GET: api/Category
         [HttpGet]
-        public ActionResult<IEnumerable<CategoryReadDto>> GetCategoties()
+        public ActionResult<IEnumerable<CategoryReadDto>> GetCategories()
         {
             var category = _categoryRepository.GetAllCategories();
 
