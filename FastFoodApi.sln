@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.29806.167
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FastFoodWebApi", "FastFoodWebApi\FastFoodWebApi.csproj", "{AE7306E7-A389-4530-81FA-4BAF8DA02A90}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "webApi-Tests", "webApi-Tests\webApi-Tests.csproj", "{6AC112A9-84D3-4B8B-B676-C007B3A52A04}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "webApi-Tests", "webApi-Tests\webApi-Tests.csproj", "{6AC112A9-84D3-4B8B-B676-C007B3A52A04}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XUnitTestFastFoodApi", "XUnitTestFastFoodApi\XUnitTestFastFoodApi.csproj", "{4F389E42-0713-47EB-AA08-68905FBFE1BC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{6AC112A9-84D3-4B8B-B676-C007B3A52A04}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6AC112A9-84D3-4B8B-B676-C007B3A52A04}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6AC112A9-84D3-4B8B-B676-C007B3A52A04}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F389E42-0713-47EB-AA08-68905FBFE1BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F389E42-0713-47EB-AA08-68905FBFE1BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F389E42-0713-47EB-AA08-68905FBFE1BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F389E42-0713-47EB-AA08-68905FBFE1BC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
