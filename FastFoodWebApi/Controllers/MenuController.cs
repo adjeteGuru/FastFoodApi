@@ -24,7 +24,7 @@ namespace FastFoodWebApi.Controllers
         }
         // GET: api/Menu
         [HttpGet]
-        public ActionResult<IEnumerable<MenuReadDto>> GetAllMenus()
+        public ActionResult<IEnumerable<MenuReadDto>> GetMenus()
         {
             var menus = _menuRepository.GetAllMenus();
 
