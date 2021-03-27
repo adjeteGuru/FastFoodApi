@@ -26,7 +26,7 @@ namespace FastFoodWebApi.DataAccess
             _db.Categories.Add(category);
         }
 
-        public IEnumerable<Category> GetAllCategories()
+        public IEnumerable<Category> GetCategories()
         {
             return _db.Categories
                 .Include(x => x.Menus)
