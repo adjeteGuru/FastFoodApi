@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using FastFoodWebApi.DataAccess;
 using FastFoodWebApi.DataAccess.Contracts;
+using FastFoodWebApi.Database;
 using FastFoodWebApi.DTOs;
 using FastFoodWebApi.Models;
 using Microsoft.AspNetCore.Http;
@@ -14,9 +16,9 @@ namespace FastFoodWebApi.Controllers
     [Route("api/[controller]")]
     [ApiController]
     public class CategoryController : ControllerBase
-    {
-        private readonly ICategoryRepository _categoryRepository;
-        private readonly IMapper _mapper;
+    {        
+        private ICategoryRepository _categoryRepository;
+        private IMapper _mapper;     
 
         public CategoryController(ICategoryRepository categoryRepository, IMapper mapper)
         {

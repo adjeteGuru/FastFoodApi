@@ -15,14 +15,6 @@ namespace XUnitTestFastFoodApi.UnitTests
 {
     public class CategoryControllerTest
     {
-        CategoryController _controller;
-        ICategoryRepository _categoryRepository;
-        IMapper _mapper;
-
-        public CategoryControllerTest(ICategoryRepository categoryRepo, IMapper mapper)
-        {            
-             _controller = new CategoryController(categoryRepo, mapper);
-        }
         [Fact]
         public void GetCategories_ShouldReturnAllCategoriesList()
         {           
@@ -34,23 +26,35 @@ namespace XUnitTestFastFoodApi.UnitTests
             //Them I need to new up the controller to be tested
 
            
-            var mockCategoryRepo = new Mock<ICategoryRepository>();
-            mockCategoryRepo.Setup(c => c.GetCategories())
-                .Returns((IEnumerable<Category>)mockCategoryRepo);
-                
+            var mockRepo = new Mock<ICategoryRepository>();
+            mockRepo.Setup(c => c.GetCategories())             
+                .Returns((IEnumerable<Category>)new CategoryReadDto[]
+                {
+                    new CategoryReadDto {Id= 1, Name= "Drink"},
+                    new CategoryReadDto {Id= 2, Name ="Kebab"}
+                }.AsEnumerable());
 
             var mockMapper = new Mock<IMapper>();
-            mockMapper.Setup(m => m.Map<IEnumerable<CategoryReadDto>>(mockMapper));          
+            mockMapper.Setup(m => m.Map<IEnumerable<Category>>(mockMapper))            
+                 .Returns(new Category[]
+                 {
+                     new Category {Id = 1, Name = "Drink"},
+                     new Category {Id = 2, Name = "Kebab"}
+                 }.AsEnumerable());              
 
-            var controllerTest = new CategoryController(mockCategoryRepo.Object, mockMapper.Object);
+
+            var controller = new CategoryController(mockRepo.Object, mockMapper.Object);
 
             //Act
-            var resultD = controllerTest.GetAllCategories();
+            var actual = controller.GetAllCategories();
+            
 
             //Assert
-            var viewResult = Assert.IsAssignableFrom<IEnumerable<CategoryReadDto>>(resultD);        
-                        
-                Assert.Equal(viewResult, resultD.Value);
+            var expected = Assert.IsAssignableFrom<IEnumerable<CategoryReadDto>>(actual);            
+
+
+             Assert.Equal(expected, actual.Value);
+            
                
         }
     }
