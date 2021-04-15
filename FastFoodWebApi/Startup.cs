@@ -39,10 +39,9 @@ namespace FastFoodWebApi
             //
             services.AddControllers().AddNewtonsoftJson(options =>
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
-           );
-            //
+           );            
 
-
+            //this is a mapping Interfaces to the instance of the respective repositories
             services.AddScoped<ICustomerRepository, CustomerRepository>();
             services.AddScoped<IOrderRepository, OrderRepository>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();

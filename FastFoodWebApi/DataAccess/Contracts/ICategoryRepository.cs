@@ -9,7 +9,7 @@ namespace FastFoodWebApi.DataAccess.Contracts
     public interface ICategoryRepository
     {
         bool SaveChanges();
-        public IEnumerable<Category> GetAllCategories();
+        public IEnumerable<Category> GetCategories();
         public Category GetCategoryById(int id);
 
         public void CreateCategory(Category category);
