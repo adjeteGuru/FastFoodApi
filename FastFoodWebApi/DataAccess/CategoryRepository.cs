@@ -14,14 +14,14 @@ namespace FastFoodWebApi.DataAccess
         private readonly FastFoodContext _db;
         public CategoryRepository(FastFoodContext db)
         {
-            _db = db;
+            _db = db ?? throw new ArgumentNullException(nameof(_db));
         }
         public void CreateCategory(Category category)
         {
-            if (category == null)
-            {
-                throw new ArgumentNullException(nameof(category));
-            }
+            //if (category == null)
+            //{
+            //    throw new ArgumentNullException(nameof(category));
+            //}
 
             _db.Categories.Add(category);
         }
@@ -40,10 +40,10 @@ namespace FastFoodWebApi.DataAccess
 
         public void RemoveCategory(Category category)
         {
-            if (category == null)
-            {
-                throw new ArgumentNullException(nameof(category));
-            }
+            //if (category == null)
+            //{
+            //    throw new ArgumentNullException(nameof(category));
+            //}
 
             _db.Categories.Remove(category);
         }

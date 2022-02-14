@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FastFoodWebApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/customer")]
     [ApiController]
     public class CustomerController : ControllerBase
     {
@@ -55,6 +55,7 @@ namespace FastFoodWebApi.Controllers
         [HttpPost]
         public ActionResult<CustomerReadDto> CreateCustomer(CustomerCreateDto customerCreateDto)
         {
+
             //create on object from Dto to mappe it to Model
             var customerModel = _mapper.Map<Customer>(customerCreateDto);
 
@@ -82,7 +83,7 @@ namespace FastFoodWebApi.Controllers
             }
 
             _mapper.Map(customerUpdateDto, customerToUpdate);
-
+             
             _customerRepository.UpdateCustomer(customerToUpdate);
 
             _customerRepository.SaveChanges();

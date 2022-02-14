@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FastFoodWebApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/ordermenu")]
     [ApiController]
     public class OrderMenuController : ControllerBase
     {

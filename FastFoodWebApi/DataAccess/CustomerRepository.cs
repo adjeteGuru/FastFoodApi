@@ -1,6 +1,7 @@
 ﻿using FastFoodWebApi.DataAccess.Contracts;
 using FastFoodWebApi.Database;
 using FastFoodWebApi.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,12 +37,17 @@ namespace FastFoodWebApi.DataAccess
 
         public IEnumerable<Customer> GetAllCustomers()
         {
-            return _db.Customers.ToList();
+            return _db.Customers
+                .Include(x => x.Orders)
+                .ToList();
         }
 
         public Customer GetCustomerById(int? id)
         {
-            return _db.Customers.FirstOrDefault(x => x.Id == id);
+            return _db.Customers
+                .Include(x => x.Orders)
+                .FirstOrDefault(x => x.Id == id);
+                
         }
 
         public bool SaveChanges()

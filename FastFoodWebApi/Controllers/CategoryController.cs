@@ -22,8 +22,8 @@ namespace FastFoodWebApi.Controllers
 
         public CategoryController(ICategoryRepository categoryRepository, IMapper mapper)
         {
-            _categoryRepository = categoryRepository;
-            _mapper = mapper;
+            _categoryRepository = categoryRepository /*?? throw new ArgumentNullException(nameof(_categoryRepository))*/;
+            _mapper = mapper/* ?? throw new ArgumentNullException(nameof(_mapper))*/;
         }
 
 
@@ -54,7 +54,7 @@ namespace FastFoodWebApi.Controllers
         // POST: api/Category
         [HttpPost]
         public ActionResult<CategoryReadDto> CreateCategory(CategoryCreateDto categoryCreateDto)
-        {
+        {            
             var categoryModel = _mapper.Map<Category>(categoryCreateDto);
 
             _categoryRepository.CreateCategory(categoryModel);
